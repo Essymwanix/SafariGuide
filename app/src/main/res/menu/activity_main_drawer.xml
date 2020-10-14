@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sites"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Sites" />
+        <item
+            android:id="@+id/nav_hotels"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Hotels" />
+        <item
+            android:id="@+id/nav_rest"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Restaurants" />
+        <item
+            android:id="@+id/nav_clinics"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Hospitals/Clinics" />
+        <item
+            android:id="@+id/nav_other"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Others" />
+
+    </group>
+
+
+</menu>

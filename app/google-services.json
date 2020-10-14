@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "834317121831",
+    "firebase_url": "https://safariguide-c7914.firebaseio.com",
+    "project_id": "safariguide-c7914",
+    "storage_bucket": "safariguide-c7914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834317121831:android:a36a489f4e11c2feee1102",
+        "android_client_info": {
+          "package_name": "com.example.safariguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834317121831-83eglkuga7bcsvcr16dq7kubp2m69fdb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Zq_zIBeYBfC1RHVRqc7jU41VQmCmfCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834317121831-83eglkuga7bcsvcr16dq7kubp2m69fdb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
