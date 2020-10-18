@@ -1,6 +1,8 @@
 package com.example.safariguide;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class Sites extends Fragment {
+public class Sites extends Fragment implements RecyclerAdapter.ListItemClickListener {
     private RecyclerView recyclerView;
-    private RecyclerAdapter recyclerAdapter;
+    private RecyclerAdapter recyclerAdapter ;
     private DatabaseReference mRef;
     private ArrayList<Model> modelArrayList;
-   // private Context mContext;
+    Context mContext;
+    RecyclerAdapter.ListItemClickListener onClickListener;
 
     @Nullable
     @Override
@@ -46,6 +49,7 @@ public class Sites extends Fragment {
         recyclerView.setHasFixedSize(true);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerAdapter = new RecyclerAdapter(mContext, modelArrayList,this);
 
         mRef = FirebaseDatabase.getInstance().getReference();
         modelArrayList = new ArrayList<>();
@@ -73,7 +77,7 @@ public class Sites extends Fragment {
                     modelArrayList.add(model);
 
                 }
-                recyclerAdapter = new RecyclerAdapter(getContext(), modelArrayList);
+                recyclerAdapter = new RecyclerAdapter(mContext, modelArrayList, onClickListener);
                 recyclerView.setAdapter(recyclerAdapter);
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -84,6 +88,7 @@ public class Sites extends Fragment {
             }
         });
     }
+
     /*private void clear(){
         if (modelArrayList!=null){
             modelArrayList.clear();
@@ -101,4 +106,18 @@ public class Sites extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Sites");
     }
+
+    @Override
+    public void onListItemClick(View v, int position) {
+        if (position == 0){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://lakenakurulodge.com"));
+            startActivity(i);
+        }
+        else if (position==1){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mountelgonhotel.com"));
+            startActivity(i);
+        }
+    }
+
+
 }

@@ -18,10 +18,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private static final String Tag = "RecyclerView";
     private Context mContext;
     private ArrayList<Model> modelArrayList;
+    final private ListItemClickListener mOnClickListener;
 
-    public RecyclerAdapter(Context mContext, ArrayList<Model> modelArrayList) {
+    public RecyclerAdapter(Context mContext, ArrayList<Model> modelArrayList, ListItemClickListener onClickListener) {
         this.mContext = mContext;
         this.modelArrayList = modelArrayList;
+        this.mOnClickListener = onClickListener;
     }
 
 
@@ -47,7 +49,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public int getItemCount() {
         return modelArrayList.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView title;
         TextView desc;
@@ -56,6 +58,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             imageView = itemView.findViewById(R.id.image);
             title = itemView.findViewById(R.id.textView);
             desc = itemView.findViewById(R.id.textViewDesc);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+           // int position = getAdapterPosition();
+            mOnClickListener.onListItemClick(view,getAdapterPosition());
+        }
+    }
+    interface ListItemClickListener{
+        void onListItemClick(View v, int position);
     }
 }
