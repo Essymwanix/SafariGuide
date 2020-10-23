@@ -1,5 +1,6 @@
 package com.example.safariguide;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,11 +29,12 @@ import java.util.ArrayList;
  */
 
 
-public class Restaurants extends Fragment implements RecyclerAdapter.ListItemClickListener{
+public class Restaurants extends Fragment implements RecyclerAdapter.ListItemClickListener {
     private RecyclerView recyclerView;
-    private RecyclerAdapter recyclerAdapter;
+    private RecyclerAdapter recyclerAdapter ;
     private DatabaseReference mRef;
     private ArrayList<Model> modelArrayList;
+    Context mContext;
     RecyclerAdapter.ListItemClickListener onClickListener;
 
     @Nullable
@@ -41,21 +43,25 @@ public class Restaurants extends Fragment implements RecyclerAdapter.ListItemCli
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
         View view = inflater.inflate(R.layout.fragment_rest, container, false);
+
+        onClickListener = this;
+
         recyclerView = view.findViewById(R.id.rvRest);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerAdapter = new RecyclerAdapter(mContext, modelArrayList,this);
 
         mRef = FirebaseDatabase.getInstance().getReference();
         modelArrayList = new ArrayList<>();
 
-        //clear();
-
         GetDataFromFirebase();
         return view;
+
     }
+
     private void GetDataFromFirebase()
     {
         Query query = mRef.child("Data");
@@ -72,7 +78,7 @@ public class Restaurants extends Fragment implements RecyclerAdapter.ListItemCli
                     modelArrayList.add(model);
 
                 }
-                recyclerAdapter = new RecyclerAdapter(getContext(), modelArrayList,onClickListener);
+                recyclerAdapter = new RecyclerAdapter(mContext, modelArrayList, onClickListener);
                 recyclerView.setAdapter(recyclerAdapter);
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -87,9 +93,8 @@ public class Restaurants extends Fragment implements RecyclerAdapter.ListItemCli
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Restaurants");
     }
 
@@ -104,4 +109,6 @@ public class Restaurants extends Fragment implements RecyclerAdapter.ListItemCli
             startActivity(i);
         }
     }
+
+
 }

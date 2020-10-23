@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +40,7 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
         //change R.layout.yourlayoutfilename for each of your fragments
         View view = inflater.inflate(R.layout.fragment_sites, container, false);
 
+        onClickListener = this;
 
         recyclerView = view.findViewById(R.id.rvSites);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -53,8 +52,6 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
 
         mRef = FirebaseDatabase.getInstance().getReference();
         modelArrayList = new ArrayList<>();
-
-        //clear();
 
         GetDataFromFirebase();
         return view;
@@ -89,16 +86,6 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
         });
     }
 
-    /*private void clear(){
-        if (modelArrayList!=null){
-            modelArrayList.clear();
-
-            if (recyclerAdapter!=null){
-                recyclerAdapter.notifyDataSetChanged();
-            }
-        }
-        modelArrayList = new ArrayList<>();
-    }*/
 
 
     @Override
@@ -110,7 +97,7 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
     @Override
     public void onListItemClick(View v, int position) {
         if (position == 0){
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://lakenakurulodge.com"));
+            Intent i = new Intent(getActivity(), First.class);
             startActivity(i);
         }
         else if (position==1){
