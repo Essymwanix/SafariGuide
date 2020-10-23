@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safariguide.Sitespack.First;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,7 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
     private ArrayList<Model> modelArrayList;
     Context mContext;
     RecyclerAdapter.ListItemClickListener onClickListener;
+    Model model = new Model();
 
     @Nullable
     @Override
@@ -98,10 +100,14 @@ public class Sites extends Fragment implements RecyclerAdapter.ListItemClickList
     public void onListItemClick(View v, int position) {
         if (position == 0){
             Intent i = new Intent(getActivity(), First.class);
+            i.putExtra("name",modelArrayList.get(position).getTitle() );
+            i.putExtra("desc", modelArrayList.get(position).getDescription());
             startActivity(i);
         }
         else if (position==1){
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mountelgonhotel.com"));
+            Intent i = new Intent(getActivity(),First.class);
+            i.putExtra("name",modelArrayList.get(position).getTitle() );
+            i.putExtra("desc", modelArrayList.get(position).getDescription());
             startActivity(i);
         }
     }
